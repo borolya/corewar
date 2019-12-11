@@ -3,8 +3,8 @@
 unsigned int op_st(t_game *game, t_carriage *car, t_op op)
 {
 	unsigned int    new_pc;
-	__uint32_t      args[3];
-	__uint32_t      adr;
+	int32_t      args[3];
+	int32_t      adr;
 
 	if (check_targ(game->arena, car, op, &new_pc) == -1)
 		return (new_pc);
@@ -20,6 +20,6 @@ unsigned int op_st(t_game *game, t_carriage *car, t_op op)
 		return (new_pc);
 	}
 	adr = bytes_to_int(game->arena, car->pc, IND_SIZE);
-	int_to_byte(car->reg[args[0]], game->arena, adr, REG_SIZE);
+	int_to_bytes(car->reg[args[0]], game->arena, adr, REG_SIZE);
 	return (new_pc);
 }

@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-unsigned int op_ldi(t_game *game, t_carriage *car, t_op op)
+unsigned int op_lldi(t_game *game, t_carriage *car, t_op op)
 {
 	int32_t		args[3];
 	unsigned int	new_pc;

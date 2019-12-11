@@ -3,9 +3,9 @@
 unsigned int op_xor(t_game *game, t_carriage *car, t_op op)
 {
     unsigned int new_pc;
-    __uint32_t args[3];
+    int32_t args[3];
     int i;
-    __uint32_t xor;
+    int32_t xor;
 
     if (check_targ(game->arena, car, op, &new_pc) == -1)
 		return (new_pc);
