@@ -60,17 +60,15 @@ int		main(int argc, char *argv[])
 {
 	t_val	val;
 	t_game	game;
-	int		dump_value;
 
-	dump_value = 0; //найти это значение из консоли 
 	ft_val_initial(&val);
 	if (argc >= 2)
 	{
 		ft_catch_argv(&val, argc, &argv);
 		ft_find_players_and_flags(&val);
 		ft_analyse_players(&val, game.champ);
-		init_game(&game, val.amount_of_players, dump_value);
-		start_game(&game, dump_value);
+		init_game(&game, val.amount_of_players, val.dump_value);
+		start_game(&game, val.dump_value);
 	}
 	else
 		ft_error("Not enough arguments.");

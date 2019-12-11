@@ -20,10 +20,10 @@ int shift_arg(__uint8_t t_array[], int size, int dir_size)
 	return (shift);
 }
 
-__uint32_t take_value_shift_pc(__uint8_t type, __uint8_t arena[], unsigned int *pc, t_op op) //5 параметров!!!
+int32_t take_value_shift_pc(__uint8_t type, __uint8_t arena[], unsigned int *pc, t_op op) //5 параметров!!!
 {
 	int adr;
-	__uint32_t numb;
+	int32_t numb;
 
 	if (type == T_DIR)
 	{

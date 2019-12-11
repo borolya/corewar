@@ -80,9 +80,7 @@ void		ft_analyse_players(t_val *val, t_champ *champ)
 			ft_printf("%d\n", fd);
 			ft_error("Bad file.\n");
 		}
-		init_champ(fd, &(champ[i]));
-		ft_printf("name = %s\n", champ[i].name); 
-		ft_printf("fd = %d\n", fd);
+		init_champ(fd, &(champ[i]), i);
 		i++;
 	}
 	

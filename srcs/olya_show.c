@@ -8,12 +8,12 @@ void show_arena(t_game *game)
     ft_printf("\nARENA\n");
     while (i <  MEM_SIZE)
     {
-        ft_printf("%.2x", game->arena[i]);
+        ft_printf("%.2x ", game->arena[i]);
         i++;
         if (i % (2 * 32) == 0)//last лишний
             ft_putchar('\n');
-        else if (i % 2 == 0)//last лишний
-            ft_putchar(' ');
+        //else if (i % 2 == 0)//last лишний
+         //   ft_putchar(' ');
     }
 }
 

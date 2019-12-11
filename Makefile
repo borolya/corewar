@@ -12,7 +12,7 @@
 
 NAME = corewar
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 HEADER = -I includes -I libft/includes
 LIB		= -L libft/ -lft
 

@@ -23,7 +23,7 @@ int		ft_check_dump(int dump)
 {
 	if (dump <= 0)
 		ft_error("Incorrect dump.");
-	return (1);
+	return (dump);
 }
 
 void	ft_find_flags(t_val *val, char ***str)
@@ -47,7 +47,6 @@ void	ft_find_flags(t_val *val, char ***str)
 		    ;
 	}
 	ft_sort_players(val);
-    ft_print_players(val);
 }
 
 void	ft_find_players_and_flags(t_val *val)

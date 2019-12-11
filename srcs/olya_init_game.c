@@ -5,24 +5,15 @@ int revision(t_game *game)
 	t_list *list;
 	t_carriage *car;
 	t_list *pr_list;
-	//char *str;
 
 	game->checks++;
-
-	//dell died carriage
-	
-	//for test
-	//ft_printf("введите переменную live\n");
-	//get_next_line(0, &str);
-	//game->live = ft_atoi(str);
-
 	list = game->carriages;
 	while (list != NULL)
 	{
 		car = (t_carriage*)(list->content);
 		if (game->hook - car->live > game->cycles_to_die) //удаление каретки 
 		{
-			ft_printf("del = %d\n", car->numb);
+			//ft_printf("del = %d\n", car->numb);
 			free(car);
 			if (game->carriages == list)
 			{
@@ -39,21 +30,19 @@ int revision(t_game *game)
 		}
 		else
 		{
-			ft_printf("Notdel = %d\n", car->numb);
+			//ft_printf("Notdel = %d\n", car->numb);
 			pr_list = list;
 			list = list->next;
 		}
 	}
-	//модификация c_t_d
-	ft_printf("check = %d ", game->checks);
+	//ft_printf("check = %d ", game->checks);
 	if (game->live >= NBR_LIVE || game->checks > MAX_CHECKS)
 	{
 		game->cycles_to_die -= CYCLE_DELTA;
 		game->checks = 0;
 	}
-	ft_printf("hook=%d,  live=%d,  ctd = %d\n",
-		game->hook, game->live, game->cycles_to_die);
-	show_carriage_list(game->carriages);
+	//ft_printf("hook=%d,  live=%d,  ctd = %d\n", game->hook, game->live, game->cycles_to_die);
+	//show_carriage_list(game->carriages);
 	game->live = 0;
 	return (game->cycles_to_die);
 }
@@ -63,14 +52,9 @@ void start_game(t_game *game, int dump_value)
 	t_list      *list;
 	t_carriage  *car;
 	int         left_to_check;
+	t_champ		champ;
 
 	left_to_check = game->cycles_to_die;
-	/*
-	//test
-	game->hook = 24244;
-	game->cycles_to_die=136;
-	left_to_check = 0;
-	*/
 	while (game->carriages != NULL) //hook
 	{	
 		list = game->carriages;
@@ -90,8 +74,14 @@ void start_game(t_game *game, int dump_value)
 		left_to_check--;
 		game->hook++;
 		if (game->hook == dump_value)
+		{
+			ft_printf("\n\nAFTER DUMP = %d \n\n", dump_value);
 			show_arena(game);
+			ft_error("STOP GAME BY DUMP");
+		}
 	}
+	champ = game->champ[game->last_alive - 1];
+	ft_printf("Contestant %d, \"%s\", has won !\n", game->last_alive, champ.name);
 }
 
 void            init_game(t_game *game, int amount_of_players, int dump_value)
@@ -110,7 +100,8 @@ void            init_game(t_game *game, int amount_of_players, int dump_value)
 	{
 		j = 0;
 		bite = j + MEM_SIZE / amount_of_players * i;
-		while (j < (game->champ[i]).exec_code_size && bite <  MEM_SIZE / amount_of_players * (i + 1))
+		while (j < (game->champ[i]).exec_code_size && 
+				bite <  MEM_SIZE / amount_of_players * (i + 1))
 		{
 			game->arena[bite] = (game->champ[i]).exec_code[j];
 			bite++;
@@ -124,6 +115,7 @@ void            init_game(t_game *game, int amount_of_players, int dump_value)
 	game->cycles_to_die = CYCLE_TO_DIE;
 	game->checks = 0;
 	game->carriages = NULL;
+	game->champs = amount_of_players;
 	i = 0;
 	while (++i  < REG_NUMBER)
 		new_carriage.reg[i] = 0;
@@ -142,5 +134,7 @@ void            init_game(t_game *game, int amount_of_players, int dump_value)
 			ft_error("memor :(");
 		ft_lstadd(&(game->carriages), new); 
 	}
-	show_game(game);
+	 ft_printf("\n\nAFTER INIT \n\n");
+	 show_arena(game);
+	 ft_printf("\n\nEND AFTER INIT \n\n");
 }

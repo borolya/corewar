@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-void ft_take_uint(int fd, int *n)
+void ft_take_uint(int fd, int *n) // uint?
 {
 	int i;
 	uint8_t byte;
@@ -16,7 +16,7 @@ void ft_take_uint(int fd, int *n)
 	}
 }
 
-void init_champ(int fd, t_champ *champ)
+void init_champ(int fd, t_champ *champ, int pos_of_player)
 {
 	unsigned int tmp;
 	uint8_t numb;
@@ -47,8 +47,9 @@ void init_champ(int fd, t_champ *champ)
 		champ->exec_code[i] = numb;
 		i++;
 	}
-	ft_printf("size = %d, reading_byte = %d\n", champ->exec_code_size, i);
+	//ft_printf("size = %d, reading_byte = %d\n", champ->exec_code_size, i);
 	if (i != champ->exec_code_size)
 		ft_error("Wrong exec_code_size\n");
+	ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", pos_of_player + 1, champ->exec_code_size, champ->name, champ->comment);
 	//ft_printf("size = %d, i = %d\n", champ->exec_code_size, i);
 }

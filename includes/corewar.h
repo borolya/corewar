@@ -24,12 +24,12 @@
 
 typedef struct s_champ
 {
-    int fd;
-    int number; // anton
-	char name[PROG_NAME_LENGTH];
-	int exec_code_size;
-	char comment[COMMENT_LENGTH];
-	__uint8_t exec_code[CHAMP_MAX_SIZE];
+    int			d;
+    int			number; // anton
+	char		name[PROG_NAME_LENGTH];
+	int			exec_code_size;
+	char		comment[COMMENT_LENGTH];
+	__uint8_t	exec_code[CHAMP_MAX_SIZE];
 }   t_champ;
 
 typedef enum e_bool
@@ -104,7 +104,7 @@ void		    ft_analyse_players(t_val *val, t_champ *champ);
 //void	ft_val_initial(t_val *val);
 
 
-void            init_champ(int fd, t_champ *champ);
+void			init_champ(int fd, t_champ *champ, int pos_of_player);
 void            init_game(t_game *game, int amount_of_players, int dump_value);
 void			start_game(t_game *game, int dump_value);
 void			show_game(t_game *game);
@@ -114,7 +114,7 @@ void			cycles_before_execution(t_carriage *car, __uint8_t oper);
 void			operation(t_game *game, t_carriage *car, __uint8_t operation);
 
 int				shift_arg(__uint8_t t_array[], int size, int dir_size);
-__uint32_t		take_value_shift_pc(__uint8_t type, __uint8_t arena[], unsigned int *pc, t_op op);
+int32_t			take_value_shift_pc(__uint8_t type, __uint8_t arena[], unsigned int *pc, t_op op);
 int				check_targ(__uint8_t arena[], t_carriage *car, t_op op, unsigned int *new_pc);
 void			take_targ(__uint8_t byte, __uint8_t targ[], int size);
 t_carriage		copy_carriage(t_carriage *car);

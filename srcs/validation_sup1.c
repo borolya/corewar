@@ -52,6 +52,7 @@ int			ft_if_dump(char ***str, t_val *val, int *i)
 			if ((*str)[++(*i)] != NULL)
 			{
 				val->dump_value = ft_check_dump(ft_atoi((*str)[*i]));
+				ft_printf("dump = %d\n", val->dump_value);
 				return (1);
 			}
 			else

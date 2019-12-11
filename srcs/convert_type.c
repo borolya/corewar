@@ -49,7 +49,7 @@ int bytes_to_int(uint8_t arena[], int pc, int size)
 	}
 	else
 		ft_error("bad byte\n");
-	ft_printf("byte to int = %d\n", numb);
+	//ft_printf("byte to int = %d\n", numb);
 	return (numb);
 }
 
