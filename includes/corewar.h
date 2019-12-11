@@ -62,6 +62,7 @@ typedef struct s_game
 	int		checks;//количество проверок, в которых ctd не меняется 
 	t_list	*carriages;
 	int		champs;
+	int		dump_value; // костыль Антона!
 }	t_game;
 
 typedef struct	s_val
@@ -98,7 +99,6 @@ void            ft_print_players(t_val *val);
 void			ft_sort_players(t_val *val);
 int				ft_if_point_cor(char ***str, t_val *val, int *i, int *j);
 int				ft_check_pos(int pos);
-int				ft_check_dump(int dump);
 int				ft_if_visual(char ***str, t_val *val, int *i);
 void		    ft_analyse_players(t_val *val, t_champ *champ);
 //void	ft_val_initial(t_val *val);

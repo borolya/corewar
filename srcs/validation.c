@@ -19,13 +19,6 @@ int		ft_check_pos(int pos)
 	return (pos);
 }
 
-int		ft_check_dump(int dump)
-{
-	if (dump <= 0)
-		ft_error("Incorrect dump.");
-	return (dump);
-}
-
 void	ft_find_flags(t_val *val, char ***str)
 {
 	int i;

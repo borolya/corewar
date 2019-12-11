@@ -39,7 +39,7 @@ void	ft_val_initial(t_val *val)
 	val->amount_of_players = 0;
 	val->flag_dump = 0;
     val->flag_visual = 0;
-	val->dump_value = 0;
+	val->dump_value = -1;
 }
 
 void	ft_catch_argv(t_val *val, int ac, char ***str)

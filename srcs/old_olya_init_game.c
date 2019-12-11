@@ -72,13 +72,14 @@ void start_game(t_game *game, int dump_value)
 		if (left_to_check <= 0)//или в начале?
 			left_to_check = revision(game);
 		left_to_check--;
-		game->hook++;
 		if (game->hook == dump_value)
 		{
-			ft_printf("\n\nAFTER DUMP = %d \n\n", dump_value);
+			//ft_printf("\n\nAFTER DUMP = %d \n\n", dump_value);
 			show_arena(game);
-			ft_error("STOP GAME BY DUMP");
+			//ft_error("STOP GAME BY DUMP");
+			exit(-1);
 		}
+		game->hook++;
 	}
 	champ = game->champ[game->last_alive - 1];
 	ft_printf("Contestant %d, \"%s\", has won !\n", game->last_alive, champ.name);
@@ -134,7 +135,7 @@ void            init_game(t_game *game, int amount_of_players, int dump_value)
 			ft_error("memor :(");
 		ft_lstadd(&(game->carriages), new); 
 	}
-	 ft_printf("\n\nAFTER INIT \n\n");
-	 show_arena(game);
-	 ft_printf("\n\nEND AFTER INIT \n\n");
+	//  ft_printf("\n\nAFTER INIT \n\n");
+	//  show_arena(game);
+	//  ft_printf("\n\nEND AFTER INIT \n\n");
 }
