@@ -118,7 +118,7 @@ __uint32_t		take_value_shift_pc(__uint8_t type, __uint8_t arena[], unsigned int 
 int				check_targ(__uint8_t arena[], t_carriage *car, t_op op, unsigned int *new_pc);
 void			take_targ(__uint8_t byte, __uint8_t targ[], int size);
 t_carriage		copy_carriage(t_carriage *car);
-void			int_to_bytes(__uint32_t numb, __uint8_t arena[], int pc, int size);
+void			int_to_bytes(int numb, __uint8_t arena[], int pc, int size);
 int				bytes_to_int(__uint8_t arena[], int pc, int size);
 
 

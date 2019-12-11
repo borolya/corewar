@@ -2,7 +2,7 @@
 
 unsigned int op_ldi(t_game *game, t_carriage *car, t_op op)
 {
-	__uint32_t		args[3];
+	int32_t		args[3];
 	unsigned int	new_pc;
 	unsigned int	save_pc;
 	int				i;

@@ -2,7 +2,7 @@
 
 unsigned int op_lld(t_game *game, t_carriage *car, t_op op)
 {
-	__uint32_t args[3];
+	int32_t args[3];
 	unsigned int new_pc;
 	
 	if (check_targ(game->arena, car, op, &new_pc) != 0)

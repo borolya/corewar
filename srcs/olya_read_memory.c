@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-void ft_take_int(int fd, int *n)
+void ft_take_uint(int fd, int *n)
 {
 	int i;
 	uint8_t byte;
@@ -32,7 +32,7 @@ void init_champ(int fd, t_champ *champ)
 		ft_error("Short file\n");
 	if (tmp != 0x00000000)
 		ft_error("Missing NULL after name\n");
-	ft_take_int(fd, &(champ->exec_code_size));
+	ft_take_uint(fd, &(champ->exec_code_size)); //uint ???????????????????
 	if (champ->exec_code_size > CHAMP_MAX_SIZE)
 		ft_error("Exec_size code too big\n");
 	if (read(fd, champ->comment, COMMENT_LENGTH) < 0)

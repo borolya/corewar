@@ -3,9 +3,9 @@
 unsigned int op_or(t_game *game, t_carriage *car, t_op op)
 {
     unsigned int new_pc;
-    __uint32_t args[3];
+    int32_t args[3];
     int i;
-    __uint32_t or;
+    int32_t or;
 
     if (check_targ(game->arena, car, op, &new_pc) == -1)
 		return (new_pc);
