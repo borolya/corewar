@@ -6,17 +6,11 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:05:17 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/12 15:06:24 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/12/14 21:55:28 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static void		ft_old_error(char **str)
-{
-	ft_printf("Incorrect input = %s.\n", *str);
-	exit (-1);
-}
 
 int         ft_if_point_cor(char ***str, t_val *val, int *i, int *j)
 {
@@ -31,18 +25,38 @@ int         ft_if_point_cor(char ***str, t_val *val, int *i, int *j)
     return (0);
 }
 
-int			ft_if_visual(char ***str, t_val *val, int *i)
+int			ft_dump_param(char ***str, t_val *val, int *i)
 {
+
 	if (ft_strequ((*str)[*i], "-v") == 1)
 		{
-			if (val->flag_visual == 0)
+			if (val->v_param == 0)
 			{
-				val->flag_visual = 1;
-				(*i)++; // change!!!!
+				val->v_param = 1;
+				++(*i);
+				if ((*str)[*i] != NULL) // change!!!!
+					val->value_param = ft_check_dump(str, ft_atoi((*str)[*i]), i);
+				else
+					ft_error("Don't have value of \"-v\" param.\n");
 				return (1);
 			}
 			else
 				ft_error("Incorrect input visualisation \"-v\".");
+		}
+	return (0);
+}
+
+int			ft_if_visual(char ***str, t_val *val, int *i)
+{
+	if (ft_strequ((*str)[*i], "-g") == 1)
+		{
+			if (val->flag_visual == 0)
+			{
+				val->flag_visual = 1;
+				return (1);
+			}
+			else
+				ft_error("Incorrect input visualisation \"-g\".");
 		}
 	else
 		ft_old_error(&((*str)[*i]));

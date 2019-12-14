@@ -1,9 +1,10 @@
 #include "corewar.h"
 
-unsigned int op_live(t_game *game, t_carriage *car, t_op op)
+unsigned int op_live(t_val *val, t_game *game, t_carriage *car, t_op op)
 {
     int32_t t_dir;
 
+    (void)val;
     game->live++;
     car->pc = (car->pc + 1) % MEM_SIZE;
     t_dir = take_value_shift_pc(T_DIR, game->arena, car, op);

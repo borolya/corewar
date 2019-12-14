@@ -1,10 +1,11 @@
 #include "corewar.h"
 
-unsigned int op_zjmp(t_game *game, t_carriage *car, t_op op)
+unsigned int op_zjmp(t_val *val, t_game *game, t_carriage *car, t_op op)
 {
 	__uint32_t t_dir;
 	//if carry == 0 сдвигать на количество аргументов? нет
-    
+
+	(void)val;
 	if (car->carry == 1)
 	{
         t_dir = bytes_to_int(game->arena, car->pc + 1, op.dir_size);

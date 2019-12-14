@@ -1,12 +1,13 @@
 #include "corewar.h"
 
-unsigned int op_sub(t_game *game, t_carriage *car, t_op op)
+unsigned int op_sub(t_val *val, t_game *game, t_carriage *car, t_op op)
 {
     unsigned int new_pc;
     int32_t args[3];
     int i;
     int32_t sub;
 
+    (void)val;
     if (check_targ(game->arena,car, op, &new_pc) == -1)
 		return (new_pc);
     i = -1;

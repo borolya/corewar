@@ -10,7 +10,9 @@ void int_to_bytes(int numb, __uint8_t arena[], int pc, int size)
 	// 	arena[(pc + i) % MEM_SIZE] = numb % 256;
 	// 	numb = numb / 256;
 	// }
-	p = &numb;
+	while (pc < 0)
+        pc += MEM_SIZE;
+    p = &numb;
 	if (size == 4)
 	{
 		arena[pc % MEM_SIZE] = *(uint8_t*)(p + 3);

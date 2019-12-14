@@ -47,7 +47,7 @@ int revision(t_game *game)
 	return (game->cycles_to_die);
 }
 
-void start_game(t_game *game, int dump_value)
+void		start_game(t_val *val, t_game *game, int dump_value)
 {
 	t_list      *list;
 	t_carriage  *car;
@@ -58,6 +58,12 @@ void start_game(t_game *game, int dump_value)
 	while (game->carriages != NULL) //hook
 	{
 		//ft_printf("now cycle %d\n", game->hook);
+		game->hook++;
+		if (val->value_param == 2 || val->value_param == 30)
+		{
+			if (val->dump_value != 0)
+				ft_printf("It is now cycle %d\n", game->hook);
+		}
 		list = game->carriages;
 		while (list != NULL) // hook of carriage
 		{
@@ -67,8 +73,8 @@ void start_game(t_game *game, int dump_value)
 			if (car->hookbefexe > 0)
 				car->hookbefexe--;
 			if (car->hookbefexe == 0)
-				operation(game, car, car->operation);// доделать
-			list=list->next;
+				operation(val, game, car, car->operation);// доделать
+			list = list->next;
 		}
 		if (left_to_check <= 0)//или в начале?
 			left_to_check = revision(game);
@@ -80,7 +86,6 @@ void start_game(t_game *game, int dump_value)
 			//ft_error("STOP GAME BY DUMP");
 			exit(-1);
 		}
-		game->hook++;
 	}
 	champ = game->champ[game->last_alive - 1];
 	ft_printf("Contestant %d, \"%s\", has won !\n", game->last_alive, champ.name);

@@ -1,5 +1,12 @@
 #include "corewar.h"
 
+unsigned int mod(int pc)
+{
+    while (pc < 0)
+        pc += MEM_SIZE;
+    return (pc % MEM_SIZE);
+}
+
 int shift_arg(__uint8_t t_array[], int size, int dir_size)
 {
 	int shift;
@@ -71,9 +78,9 @@ int32_t take_value_shift_pc(__uint8_t type, __uint8_t arena[], t_carriage *car, 
 	else if (type == T_IND)
 	{
 		if (op.idx_mod)
-			adr = (car->save_pc + bytes_to_int(arena, car->pc, IND_SIZE) % IDX_MOD) % MEM_SIZE;
-		else
-			adr = (car->save_pc + bytes_to_int(arena, car->pc, IND_SIZE)) % MEM_SIZE;
+            adr = mod(car->save_pc + bytes_to_int(arena, car->pc, IND_SIZE) % IDX_MOD);
+        else
+            adr = mod(car->save_pc + bytes_to_int(arena, car->pc, IND_SIZE));
 		numb = bytes_to_int(arena, adr, REG_SIZE);
 		car->pc = (car->pc + IND_SIZE) % MEM_SIZE;
 	}
@@ -86,13 +93,14 @@ int check_targ(__uint8_t arena[], t_carriage *car, t_op op, unsigned int *new_pc
 {
     int i;
 
+	car->step = 0;
     if (op.tcode)
     {
 		car->pc = (car->pc + LEN_ARGS_CODE) % MEM_SIZE;
         take_targ(arena[car->pc], car->targ, op.count_args);
         car->pc = (car->pc + 1) % MEM_SIZE;
-		*new_pc = (car->pc +
-			shift_arg(car->targ, op.count_args, op.dir_size)) % MEM_SIZE;
+		car->step = shift_arg(car->targ, op.count_args, op.dir_size);
+		*new_pc = (car->pc + car->step) % MEM_SIZE;
         i = -1;
         while (++i < op.count_args)
         {
@@ -101,12 +109,14 @@ int check_targ(__uint8_t arena[], t_carriage *car, t_op op, unsigned int *new_pc
         }
     }
     else
-    {
+    { //?
 		*new_pc = (car->pc  + 1) % MEM_SIZE; //+1 ??
         i = -1;
         while (++i < op.count_args)
             car->targ[i] = op.targ[i];
+		car->step = shift_arg(car->targ, op.count_args, op.dir_size);
     }
+	car->step += 1 + op.tcode;
     return (0);
 }
 

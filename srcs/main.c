@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:00:55 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/14 12:56:47 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/12/14 22:03:30 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_val_initial(t_val *val)
 	val->flag_dump = 0;
     val->flag_visual = 0;
 	val->dump_value = -1;
+	val->v_param = 0;
+	val->value_param = 0;
 }
 
 void	ft_catch_argv(t_val *val, int ac, char ***str)
@@ -69,7 +71,7 @@ int		main(int argc, char *argv[])
 		ft_analyse_players(&val, game.champ, &(game.champs));
 		ft_introducing_contestants(game.champ, game.champs);
 		init_game(&game, val.amount_of_players);
-		start_game(&game, val.dump_value);
+		start_game(&val, &game, val.dump_value);
 	}
 	else
 		ft_error("Not enough arguments.");

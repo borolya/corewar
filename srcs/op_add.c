@@ -1,7 +1,8 @@
 #include "corewar.h"
 
-unsigned int op_add(t_game *game, t_carriage *car, t_op op)
+unsigned int op_add(t_val *val, t_game *game, t_carriage *car, t_op op)
 {
+    (void)val;
     unsigned int new_pc;
     __uint32_t args[3];
     int i;

@@ -1,11 +1,12 @@
 #include "corewar.h"
 
-unsigned int op_st(t_game *game, t_carriage *car, t_op op)
+unsigned int op_st(t_val *val, t_game *game, t_carriage *car, t_op op)
 {
 	unsigned int    new_pc;
 	int32_t      	args[3];
 	int32_t      	adr;
 
+	(void)val;
 	car->save_pc = car->pc;
 	if (check_targ(game->arena, car, op, &new_pc) == -1)
 		return (new_pc);

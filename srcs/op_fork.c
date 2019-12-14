@@ -1,11 +1,12 @@
 #include "corewar.h"
 
-unsigned int op_fork(t_game *game, t_carriage *car,t_op op)
+unsigned int op_fork(t_val *val, t_game *game, t_carriage *car,t_op op)
 {
 	__uint32_t	t_dir;
 	t_carriage	new_car;
 	t_list		*new;
 
+	(void)val;
 	car->pc = (car->pc + 1) % MEM_SIZE;
 	t_dir = take_value_shift_pc(T_DIR, game->arena, car, op);
 	new_car = copy_carriage(car);

@@ -1,10 +1,11 @@
 #include "corewar.h"
 
-unsigned int op_aff(t_game*game, t_carriage *car, t_op op)
+unsigned int op_aff(t_val *val, t_game*game, t_carriage *car, t_op op)
 {
     unsigned int    new_pc;
     int32_t        reg;
 
+    (void)val;
     if (check_targ(game->arena, car, op, &new_pc) == -1)
         return (new_pc);
     reg = take_value_shift_pc(car->targ[0], game->arena, car, op);

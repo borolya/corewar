@@ -37,30 +37,30 @@ void cycles_before_execution(t_carriage *car, uint8_t oper)
 	car->operation = oper;
 }
 
-void addition_operation(t_game *game, t_carriage *car, uint8_t operation)
+void	addition_operation(t_val * val, t_game *game, t_carriage *car, uint8_t operation)
 {
 	if (operation == 0x09)
-		car->pc = op_zjmp(game, car, op_tab[operation - 1]);
+		car->pc = op_zjmp(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0a)
-		car->pc = op_ldi(game, car, op_tab[operation - 1]);
+		car->pc = op_ldi(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0b)
-		car->pc = op_sti(game, car, op_tab[operation - 1]);
+		car->pc = op_sti(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0c)
-		car->pc = op_fork(game, car, op_tab[operation - 1]);
+		car->pc = op_fork(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0d)
-		car->pc = op_lld(game, car, op_tab[operation - 1]);
+		car->pc = op_lld(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0e)
-		car->pc = op_lldi(game, car, op_tab[operation - 1]);
+		car->pc = op_lldi(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x0f)
-		car->pc = op_lfork(game, car, op_tab[operation - 1]);
+		car->pc = op_lfork(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x10)
-		car->pc = op_aff(game, car, op_tab[operation - 1]);
+		car->pc = op_aff(val, game, car, op_tab[operation - 1]);
 	else
 		car->pc = (car->pc + 1) % MEM_SIZE;
 	
 } 
 
-void operation(t_game *game, t_carriage *car, uint8_t operation)
+void	operation(t_val * val, t_game *game, t_carriage *car, uint8_t operation)
 {
 	/*
 	int i;
@@ -74,21 +74,21 @@ void operation(t_game *game, t_carriage *car, uint8_t operation)
 	*/
 	car->save_pc = car->pc % MEM_SIZE;
 	if (operation == 0x01)
-		car->pc = op_live(game, car, op_tab[operation - 1]);
+		car->pc = op_live(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x02)
-		car->pc = op_ld(game, car, op_tab[operation - 1]);
+		car->pc = op_ld(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x03)
-		car->pc = op_st(game, car, op_tab[operation - 1]);
+		car->pc = op_st(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x04)
-		car->pc = op_add(game, car, op_tab[operation - 1]);
+		car->pc = op_add(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x05)
-		car->pc = op_sub(game, car, op_tab[operation - 1]);
+		car->pc = op_sub(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x06)
-		car->pc = op_and(game, car, op_tab[operation - 1]);
+		car->pc = op_and(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x07)
-		car->pc = op_or(game, car, op_tab[operation - 1]);
+		car->pc = op_or(val, game, car, op_tab[operation - 1]);
 	else if (operation == 0x08)
-		car->pc = op_xor(game, car, op_tab[operation - 1]);
+		car->pc = op_xor(val, game, car, op_tab[operation - 1]);
 	else
-		addition_operation(game, car, operation);
+		addition_operation(val, game, car, operation);
 }

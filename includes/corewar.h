@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 13:55:33 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/11/14 13:08:44 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/12/14 22:41:30 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct	s_val
     int		amount_of_players;
     int		flag_dump; // -dump
     int		dump_value; // -dump
+	int		v_param;
+	int		value_param;
     int		flag_visual; // -v
 }				t_val;
 
@@ -101,6 +103,7 @@ void            ft_print_players(t_val *val);
 void			ft_sort_players(t_val *val);
 int				ft_if_point_cor(char ***str, t_val *val, int *i, int *j);
 int				ft_check_pos(int pos);
+int				ft_dump_param(char ***str, t_val *val, int *i);
 int				ft_if_visual(char ***str, t_val *val, int *i);
 void		    ft_analyse_players(t_val *val, t_champ *champ, int *champs);
 //void	ft_val_initial(t_val *val);
@@ -108,12 +111,12 @@ void		    ft_analyse_players(t_val *val, t_champ *champ, int *champs);
 
 void			init_champ(int fd, t_champ *champ);
 void            init_game(t_game *game, int amount_of_players);
-void			start_game(t_game *game, int dump_value);
+void			start_game(t_val *val, t_game *game, int dump_value);
 void			show_game(t_game *game);
 void			show_carriage_list(t_list *car_list);
 void			show_arena(t_game *game);
 void			cycles_before_execution(t_carriage *car, __uint8_t oper);
-void			operation(t_game *game, t_carriage *car, __uint8_t operation);
+void			operation(t_val *val, t_game *game, t_carriage *car, __uint8_t operation);
 void			ft_introducing_contestants(t_champ champ[], int champs);
 
 //int				take_values(t_carriage *car, uint8_t arena[], t_op op);
@@ -126,26 +129,28 @@ void			int_to_bytes(int numb, __uint8_t arena[], int pc, int size);
 int				bytes_to_int(__uint8_t arena[], int pc, int size);
 
 
+void			ft_old_error(char **str);
+int         	ft_check_dump(char ***str, int number, int *i);
 //int				mod(int pc);
 
 
-unsigned int				op_live(t_game *, t_carriage *, t_op);
-unsigned int				op_ld(t_game *, t_carriage *, t_op);
-unsigned int				op_st(t_game *, t_carriage *, t_op);
-unsigned int				op_add(t_game *, t_carriage *, t_op);
-unsigned int				op_sub(t_game *, t_carriage *, t_op);
-unsigned int				op_and(t_game *, t_carriage *, t_op);
-unsigned int				op_or(t_game *, t_carriage *, t_op);
-unsigned int				op_xor(t_game *, t_carriage *, t_op);
-unsigned int				op_zjmp(t_game *, t_carriage *, t_op);
-unsigned int				op_ldi(t_game *, t_carriage *, t_op);
-unsigned int				op_sti(t_game *, t_carriage *, t_op);
-unsigned int				op_fork(t_game *, t_carriage *, t_op);
-unsigned int				op_lld(t_game *, t_carriage *, t_op);
-unsigned int				op_lldi(t_game *, t_carriage *, t_op);
-unsigned int				op_lfork(t_game *, t_carriage *, t_op);
-unsigned int				op_aff(t_game *, t_carriage *, t_op);
-unsigned int				op_null(t_game *, t_carriage *, t_op);
+unsigned int				op_live(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_ld(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_st(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_add(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_sub(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_and(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_or(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_xor(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_zjmp(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_ldi(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_sti(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_fork(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_lld(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_lldi(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_lfork(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_aff(t_val *val, t_game *, t_carriage *, t_op);
+unsigned int				op_null(t_val *val, t_game *, t_carriage *, t_op);
 
 static t_op		op_tab[16] =
 {
@@ -264,7 +269,7 @@ static t_op		op_tab[16] =
   		.code = 11, 
   		.tcode = true,
   		.count_args = 3,
-  		.targ = {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
+  		.targ = {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG},
   		.wait_cycles = 25,
   		.dir_size = 2,
 		.idx_mod = true,
