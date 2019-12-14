@@ -56,7 +56,8 @@ void start_game(t_game *game, int dump_value)
 
 	left_to_check = game->cycles_to_die;
 	while (game->carriages != NULL) //hook
-	{	
+	{
+		//ft_printf("now cycle %d\n", game->hook);
 		list = game->carriages;
 		while (list != NULL) // hook of carriage
 		{
