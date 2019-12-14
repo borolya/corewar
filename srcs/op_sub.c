@@ -12,7 +12,7 @@ unsigned int op_sub(t_game *game, t_carriage *car, t_op op)
     i = -1;
     while (++i < op.count_args)
     {
-        args[i] = take_value_shift_pc(T_REG, game->arena, &(car->pc), op);
+        args[i] = take_value_shift_pc(T_REG, game->arena, car, op);
         if (args[i] < 0 || args[i] > 15)
             return (new_pc);
     }

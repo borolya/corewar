@@ -72,7 +72,7 @@ void operation(t_game *game, t_carriage *car, uint8_t operation)
 			op_tab[i].func(game, car);
 	}
 	*/
-	
+	car->save_pc = car->pc % MEM_SIZE;
 	if (operation == 0x01)
 		car->pc = op_live(game, car, op_tab[operation - 1]);
 	else if (operation == 0x02)

@@ -12,7 +12,7 @@ unsigned int op_xor(t_game *game, t_carriage *car, t_op op)
     i = -1;
     while (++i < 3)
 	{
-		args[i] = take_value_shift_pc(car->targ[i], game->arena, &(car->pc), op);
+		args[i] = take_value_shift_pc(car->targ[i], game->arena, car, op);
 		if (car->targ[i] == T_REG)
         {
             if (args[i] < 0 || args[i] > 15)

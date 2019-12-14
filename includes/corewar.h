@@ -47,8 +47,10 @@ typedef struct s_carriage
 	int				hookbefexe;
 	unsigned int	pc; //address
 	int				step; // ??
+	unsigned int	save_pc;
 	__int32_t		reg[REG_NUMBER];
 	__uint8_t		targ[3];
+	//int32_t      	args[3];
 }	t_carriage;
 
 typedef struct s_game
@@ -100,21 +102,23 @@ void			ft_sort_players(t_val *val);
 int				ft_if_point_cor(char ***str, t_val *val, int *i, int *j);
 int				ft_check_pos(int pos);
 int				ft_if_visual(char ***str, t_val *val, int *i);
-void		    ft_analyse_players(t_val *val, t_champ *champ);
+void		    ft_analyse_players(t_val *val, t_champ *champ, int *champs);
 //void	ft_val_initial(t_val *val);
 
 
-void			init_champ(int fd, t_champ *champ, int pos_of_player);
-void            init_game(t_game *game, int amount_of_players, int dump_value);
+void			init_champ(int fd, t_champ *champ);
+void            init_game(t_game *game, int amount_of_players);
 void			start_game(t_game *game, int dump_value);
 void			show_game(t_game *game);
 void			show_carriage_list(t_list *car_list);
 void			show_arena(t_game *game);
 void			cycles_before_execution(t_carriage *car, __uint8_t oper);
 void			operation(t_game *game, t_carriage *car, __uint8_t operation);
+void			ft_introducing_contestants(t_champ champ[], int champs);
 
+//int				take_values(t_carriage *car, uint8_t arena[], t_op op);
 int				shift_arg(__uint8_t t_array[], int size, int dir_size);
-int32_t			take_value_shift_pc(__uint8_t type, __uint8_t arena[], unsigned int *pc, t_op op);
+int32_t			take_value_shift_pc(__uint8_t type, __uint8_t arena[], t_carriage *car, t_op op);
 int				check_targ(__uint8_t arena[], t_carriage *car, t_op op, unsigned int *new_pc);
 void			take_targ(__uint8_t byte, __uint8_t targ[], int size);
 t_carriage		copy_carriage(t_carriage *car);

@@ -86,7 +86,7 @@ void start_game(t_game *game, int dump_value)
 	ft_printf("Contestant %d, \"%s\", has won !\n", game->last_alive, champ.name);
 }
 
-void            init_game(t_game *game, int amount_of_players, int dump_value)
+void            init_game(t_game *game, int amount_of_players)
 {
 	int i;
 	int j;
@@ -95,7 +95,6 @@ void            init_game(t_game *game, int amount_of_players, int dump_value)
 	t_list *new;
 
 	//init_arena
-	dump_value = 0;
 	ft_bzero(game->arena, MEM_SIZE);
 	i = 0;
 	while (i < amount_of_players)

@@ -14,35 +14,68 @@ int shift_arg(__uint8_t t_array[], int size, int dir_size)
 		else if (t_array[i] == T_DIR)
 			shift += dir_size;
 		else if (t_array[i] == T_IND)
-			shift += 2;
+			shift += IND_SIZE;
 		i++;
 	}
 	return (shift);
 }
+/*
+int take_values(t_carriage *car, uint8_t arena[], t_op op)
+{
+	int				i;
+	unsigned int	pc;
 
-int32_t take_value_shift_pc(__uint8_t type, __uint8_t arena[], unsigned int *pc, t_op op) //5 параметров!!!
+	pc = car->pc % MEM_SIZE;
+	i = 0;
+	while (i < op.count_args)
+	{
+		if (car->targ[i] == T_DIR)
+		{
+			car->args[i] = bytes_to_int(arena, pc, op.dir_size);
+			pc = (pc + op.dir_size) % MEM_SIZE;
+		}
+		else if (car->targ[i] == T_REG)
+		{
+			car->args[i] = (int)arena[pc % MEM_SIZE] - 1;
+			if (car->args[i] < 0 || car->args[i] > 15)
+				return (-1);
+			pc = (pc + 1) % MEM_SIZE;
+		}
+		else if (car->targ[i] == T_IND)
+		{
+			car->args[i] = bytes_to_int(arena, pc, IND_SIZE);
+			pc = (pc + REG_SIZE) % MEM_SIZE;
+		}
+		else
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+*/
+int32_t take_value_shift_pc(__uint8_t type, __uint8_t arena[], t_carriage *car, t_op op) //5 параметров!!!
 {
 	int adr;
 	int32_t numb;
 
 	if (type == T_DIR)
 	{
-		numb = bytes_to_int(arena, *pc, op.dir_size);
-		*pc += op.dir_size;
+		numb = bytes_to_int(arena, car->pc, op.dir_size);
+		car->pc = (car->pc + op.dir_size) % MEM_SIZE;
 	}
 	else if (type == T_REG)
 	{
-		numb = (int)arena[(*pc) % MEM_SIZE] - 1;
-		*pc = *pc + 1;
+		numb = (int)arena[(car->pc) % MEM_SIZE] - 1;
+		car->pc = (car->pc + 1) % MEM_SIZE;
 	}
 	else if (type == T_IND)
 	{
 		if (op.idx_mod)
-			adr = (*pc + bytes_to_int(arena, *pc, IND_SIZE) % IDX_MOD) % MEM_SIZE;
+			adr = (car->save_pc + bytes_to_int(arena, car->pc, IND_SIZE) % IDX_MOD) % MEM_SIZE;
 		else
-			adr = (*pc + bytes_to_int(arena, *pc, IND_SIZE)) % MEM_SIZE;
+			adr = (car->save_pc + bytes_to_int(arena, car->pc, IND_SIZE)) % MEM_SIZE;
 		numb = bytes_to_int(arena, adr, REG_SIZE);
-		*pc += REG_SIZE;
+		car->pc = (car->pc + IND_SIZE) % MEM_SIZE;
 	}
 	else
 		return (0);

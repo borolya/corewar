@@ -66,8 +66,9 @@ int		main(int argc, char *argv[])
 	{
 		ft_catch_argv(&val, argc, &argv);
 		ft_find_players_and_flags(&val);
-		ft_analyse_players(&val, game.champ);
-		init_game(&game, val.amount_of_players, val.dump_value);
+		ft_analyse_players(&val, game.champ, &(game.champs));
+		ft_introducing_contestants(game.champ, game.champs);
+		init_game(&game, val.amount_of_players);
 		start_game(&game, val.dump_value);
 	}
 	else

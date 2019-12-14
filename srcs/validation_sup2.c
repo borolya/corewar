@@ -67,7 +67,7 @@ void        ft_sort_players(t_val *val)
 }
 
 
-void		ft_analyse_players(t_val *val, t_champ *champ)
+void		ft_analyse_players(t_val *val, t_champ *champ, int *game_champs)
 {
 	int i;
 	int fd;
@@ -80,8 +80,8 @@ void		ft_analyse_players(t_val *val, t_champ *champ)
 			ft_printf("%d\n", fd);
 			ft_error("Bad file.\n");
 		}
-		init_champ(fd, &(champ[i]), i);
+		init_champ(fd, &(champ[i]));
 		i++;
 	}
-	
+	(*game_champs) = val->amount_of_players;
 }

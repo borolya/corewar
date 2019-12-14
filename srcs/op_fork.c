@@ -7,7 +7,7 @@ unsigned int op_fork(t_game *game, t_carriage *car,t_op op)
 	t_list		*new;
 
 	car->pc = (car->pc + 1) % MEM_SIZE;
-	t_dir = take_value_shift_pc(T_DIR, game->arena, &(car->pc), op);
+	t_dir = take_value_shift_pc(T_DIR, game->arena, car, op);
 	new_car = copy_carriage(car);
 	new_car.pc = (t_dir % IDX_MOD) % MEM_SIZE;
 	

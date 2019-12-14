@@ -6,7 +6,7 @@ unsigned int op_live(t_game *game, t_carriage *car, t_op op)
 
     game->live++;
     car->pc = (car->pc + 1) % MEM_SIZE;
-    t_dir = take_value_shift_pc(T_DIR, game->arena, &(car->pc), op);
+    t_dir = take_value_shift_pc(T_DIR, game->arena, car, op);
     car->live = game->hook;
     if (t_dir < 0 && t_dir >= -(game->champs))
         game->last_alive = -t_dir; 

@@ -12,6 +12,20 @@
 
 #include "corewar.h"
 
+void ft_introducing_contestants(t_champ champ[], int champs)
+{
+	int i;
+
+	ft_printf("Introducing contestants...\n");
+	i = 0;
+	while (i < champs)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+		i + 1, champ[i].exec_code_size, champ[i].name, champ[i].comment);
+		i++;
+	}
+}
+
 static void	ft_take_uint(t_champ *champ, int fd, int *n, int tmp)
 {
 	int		i;
@@ -38,7 +52,7 @@ static void	ft_take_uint(t_champ *champ, int fd, int *n, int tmp)
 		ft_error("Missing NULL after comment");
 }
 
-void		init_champ(int fd, t_champ *champ, int pos_of_player)
+void		init_champ(int fd, t_champ *champ)
 {
 	unsigned int	tmp;
 	uint8_t			numb;
@@ -60,7 +74,4 @@ void		init_champ(int fd, t_champ *champ, int pos_of_player)
 		champ->exec_code[++i] = numb;
 	if (++i != champ->exec_code_size)
 		ft_error("Wrong exec_code_size");
-	ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n"
-		, pos_of_player + 1, champ->exec_code_size
-			, champ->name, champ->comment);
 }

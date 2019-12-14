@@ -9,11 +9,11 @@ void show_arena(t_game *game)
     ft_printf("%s : ", "0x0000");
     while (i <  MEM_SIZE)
     {
-        if ((i + 1) % (2 * 32) == 0)
-        {
-            ft_printf("%.2x", game->arena[i]);
-        }
-        else
+        // if ((i + 1) % (2 * 32) == 0)
+        // {
+        //     ft_printf("%.2x", game->arena[i]);
+        // }
+        // else
             ft_printf("%.2x ", game->arena[i]);
         i++;
         if (i % (2 * 32) == 0)
